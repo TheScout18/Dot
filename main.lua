@@ -1,42 +1,30 @@
 local sti = 
 require("STI")
-require("camera")
+require("player")
+--require("lighting")
 
 function love.load()
+	xCloud = 0
+	
+	Pcloud = love.graphics.newImage( "textures/cloud.png" )
+	
+	Pwhale = love.graphics.newImage("textures/whale.png")
+    
+    player.LOAD()
 	
 	windowWidth  = love.graphics.getWidth()
+    
     windowHeight = love.graphics.getHeight()
-
-	love.physics.setMeter(20)
-
+	
 	map = sti.new("map/map.lua")
-
+	
+	love.physics.setMeter(32)
+	
 	world = love.physics.newWorld(0, 0)
-
+	
 	collision = map:initWorldCollision(world)
-
-	map:addCustomLayer("Sprite Layer", 3)
-
-    local spriteLayer = map.layers["Sprite Layer"]
-    spriteLater.sprites = {
-    	player = {
-    		image = love.graphics.newImage("textures/whale.png"),
-    		x = 200,
-    		y = 200,
-    		r = 0,
-    	}	
-    }
-
-    function spriteLayer:update(dt)
-    	for _, sprite in pairs(self.sprites) do 
-    		local x = math.floor(sprite.x)
-    		local y = math.floor(sprite.y)
-    		local r = sprite.r
-    		love.graphics.draw(sprite.image, x, y, r)
-    	end
-    end
+	
 end
-
 
 function love.draw()
 	local translateX = 0
@@ -49,38 +37,19 @@ function love.draw()
 
 	love.graphics.setColor(255, 255, 255, 255)
 
-	--camera:set()
-	--love.graphics.setColor( 0, 150, 90 )
-	--love.graphics.rectangle("fill", player.x - player.w/2, player.y - player.h/2, player.w, player.h)
-	--camera:unset()
+	love.graphics.setColor( 255, 255, 255, 255 ) --Cloud
+    love.graphics.draw( Pcloud, xCloud - 420, -37, 0, 1, 1, 0, 0 )
+
+    player.DRAW()
+    
 end
 
 function love.update(dt)
 	map:update(dt)
- 
-	--if love.keyboard.isDown("d") then
-	--	player:right()
-	--end
-	--if love.keyboard.isDown("a") then
-	--	player:left()
-	--end
-	--if love.keyboard.isDown(" ") and not(hasJumped) then
-	--	player:jump()
-	--end
-	--if love.keyboard.isDown("e") then
-	--	player:runr()
-	--end
-	--if love.keyboard.isDown("q") then
-	--	player:runl()
-	--end
-	
-	--player:update(dt)
-	
-	--camera:setPosition( player.x - (love.graphics.getWidth()/2), player.y - (love.graphics.getHeight()/2))
-end
+	player.UPDATE(dt)
 
---function love.keyreleased(key)
---	if (key == "a") or (key == "d") or (key == "q") or (key == "e") then
---		player.x_vel = 0
---	end
---end
+	xCloud = xCloud + 40*dt
+	if xCloud >= (800 + 420) then
+		xCloud = 0
+	end
+end

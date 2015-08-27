@@ -7,80 +7,53 @@ return {
   height = 30,
   tilewidth = 20,
   tileheight = 20,
-  nextobjectid = 1,
+  nextobjectid = 5,
+  backgroundcolor = { 51, 95, 210 },
   properties = {},
   tilesets = {
     {
-      name = "Blocks",
+      name = "Terrain",
       firstgid = 1,
       tilewidth = 20,
       tileheight = 20,
       spacing = 0,
       margin = 0,
+      image = "terrain.png",
+      imagewidth = 120,
+      imageheight = 20,
       tileoffset = {
         x = 0,
         y = 0
       },
       properties = {},
       terrains = {},
-      tilecount = 7,
-      tiles = {
-        {
-          id = 0,
-          image = "dirt.png",
-          width = 20,
-          height = 20
-        },
-        {
-          id = 1,
-          image = "grass.png",
-          width = 20,
-          height = 20
-        },
-        {
-          id = 2,
-          image = "grass2.png",
-          width = 20,
-          height = 20
-        },
-        {
-          id = 3,
-          image = "grass3.png",
-          width = 20,
-          height = 20
-        },
-        {
-          id = 4,
-          image = "lcorner.png",
-          width = 20,
-          height = 20
-        },
-        {
-          id = 5,
-          image = "rcorner.png",
-          width = 20,
-          height = 20
-        },
-        {
-          id = 6,
-          image = "lawn.png",
-          width = 20,
-          height = 4
-        }
-      }
+      tilecount = 6,
+      tiles = {}
     }
   },
   layers = {
     {
+      type = "imagelayer",
+      name = "background",
+      x = 0,
+      y = 0,
+      visible = true,
+      opacity = 1,
+      image = "background.png",
+      properties = {}
+    },
+    {
       type = "tilelayer",
-      name = "Tile Layer 1",
+      name = "Solid",
       x = 0,
       y = 0,
       width = 40,
       height = 30,
       visible = true,
       opacity = 1,
-      properties = {},
+      properties = {
+        ["collidable"] = "true"
+      },
       encoding = "lua",
       data = {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -99,9 +72,9 @@ return {
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-        0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0,
-        4, 4, 4, 3, 2, 3, 4, 2, 3, 4, 3, 2, 2, 3, 2, 3, 4, 4, 2, 4, 3, 3, 2, 4, 3, 2, 2, 4, 2, 3, 3, 2, 4, 3, 3, 4, 2, 4, 4, 4,
-        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        4, 3, 3, 3, 2, 2, 4, 4, 4, 4, 4, 2, 3, 2, 4, 3, 4, 2, 4, 3, 3, 4, 3, 4, 3, 3, 4, 4, 3, 2, 4, 4, 4, 2, 4, 4, 3, 2, 2, 3,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
